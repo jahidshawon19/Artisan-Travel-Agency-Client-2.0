@@ -1,0 +1,27 @@
+#home-section {
+    background: url("https://images.pexels.com/photos/2422461/pexels-photo-2422461.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1") no-repeat center top;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 600px; }
+    #home-section .dark-overlay {
+      background: rgba(0, 0, 0, 0.7);
+      min-height: 600px; }
+    #home-section .fa {
+      background: #fff;
+      color: #008ed6;
+      padding: 4px;
+      font-size: 40px;
+      border-radius: 5px; }
+    #home-section .card-form {
+      opacity: 0.8; }
+    #home-section .home-inner {
+      padding-top: 150px;
+      padding-bottom: 50px; }
+
+.txt-orange{
+    color:rgb(228, 119, 18);
+}
+
+ @media (max-width: 768px) {
+     #home-section h1 {
+        font-size: 36px; } }
