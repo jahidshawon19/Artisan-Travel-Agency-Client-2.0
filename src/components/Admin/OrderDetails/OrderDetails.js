@@ -11,32 +11,63 @@ const OrderDetails = () => {
         .then(res=>res.json())
         .then(data=>setOrderDetail(data))
     }, [])
+
+
+
     return (
         <>
             <AdminNav></AdminNav>
-            <section className='py-5'>
+        
+            <section>
                 <div className="container">
                     <div className="row">
-                        
+                        <div className="col-lg-4"></div>
+                        <div className="col-lg-4 mt-3">
+                            <h2 className='text-center'>Order Details</h2>
+                        </div>
+                        <div className="col-lg-4"></div>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <div className="col-lg-6">
+                            <h2 className='text-left text-warning'>คrtiŞคຖ trip</h2>
+                            <h4 className='font-weight-bold'>{orderDetail.TouristName}</h4>
+                            <small>Mobile: {orderDetail.TouristMobile}</small> <br />
+                            <small>Email: {orderDetail.TouristEmail}</small> <br />
+                            <small>{orderDetail.address}</small> <br />
+                            <small>Area: {orderDetail.city}</small> <br />
+                        </div>
+                        <div className="col-lg-3"></div>
+
+                        <div className="col-lg-3">
+                            <small><strong>Payment Method: </strong>{orderDetail.paymentMethod}</small> <br />
+                            <small><strong>Transaction ID: </strong>{orderDetail.transactionId}</small> <br />
+                            <small><strong>Tour Date: </strong>{orderDetail.date}</small> <br />
+                        </div>
+                    </div>
+                    <div className="row mt-2">
                         <div className="col-lg-12">
-                        <h3 className='text-secondary text-center'>Order Details</h3>
-                            <div className="card">
-                                <div className="card-body">
-                                    <p><strong>Place:</strong> {orderDetail.packageName}</p>
-                                    <p><strong>Tour Date:</strong> {orderDetail.date}</p>
-                                    <p><strong>Full Name:</strong> {orderDetail.TouristName}</p>
-                                    <p><strong>Email:</strong> {orderDetail.TouristEmail}</p>
-                                    <p><strong>Contact No: </strong> {orderDetail.TouristMobile}</p>
-                                    <hr />
-                                    <p><strong>Person: </strong> {orderDetail.person}</p>
-                                    <p><strong>Total Bill: </strong> {orderDetail.totalBill} Taka</p>
-                                    <p><strong>Transaction ID: </strong> {orderDetail.transactionId}</p>
-                                    <p><strong>Payment Method: </strong> {orderDetail.paymentMethod}</p>
-                                    <hr />
-                                    <p><strong>Address: </strong> {orderDetail.address}</p>
-                                    <p><strong>City: </strong> {orderDetail.city}</p>
-                                </div>
-                            </div>
+                        <table class="table table-bordered">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">No. of Tourist</th>
+      <th scope="col">Destination</th>
+      <th scope="col">Package Price</th>
+      <th scope="col">Total Bill</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>{orderDetail.person}</th>
+      <td>{orderDetail.packageName}</td>
+      <td>{orderDetail.intUnitPrice}</td>
+      <td>{orderDetail.totalBill} </td>
+    </tr>
+  
+  </tbody>
+</table>
+<small>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias, provident. Deserunt voluptate dolorum obcaecati consectetur! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus, laborum?</small>
+
                         </div>
                     </div>
                 </div>

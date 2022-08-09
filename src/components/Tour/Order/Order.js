@@ -58,6 +58,7 @@ const Order = () => {
             'date':date,
             'address':address,
             'city':city,
+            'intUnitPrice':intUnitPrice,
         
         }
 
