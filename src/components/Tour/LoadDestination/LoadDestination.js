@@ -5,11 +5,22 @@ import SingleTour from '../SingleTour/SingleTour';
 
 const LoadDestination = () => {
     const [tourPackage, setTourPackage] = useState([])
+    const[displayPackages, setDisplayPackages] = useState([])
+
     useEffect(()=>{
         fetch('http://localhost:8000/tourPackages')
         .then(res => res.json())
-        .then(data=>setTourPackage(data))
+        .then(data=>{
+            setTourPackage(data)
+            setDisplayPackages(data)
+        })
     },[])
+
+    const handleSearch=e=>{
+        const searchPackage = e.target.value
+        const matchPackage = tourPackage.filter(tp => tp.packageName.toLowerCase().includes(searchPackage.toLowerCase()))
+        setDisplayPackages(matchPackage)
+    }
     return (
         <>
           <section id="tour-section">
@@ -28,7 +39,7 @@ const LoadDestination = () => {
                     <div className="col-lg-4">
                         <form action="">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search Destination" />
+                            <input type="text" onChange={handleSearch} class="form-control" placeholder="Search Destination" />
                         </div>
                         </form>
                     </div>
@@ -38,7 +49,7 @@ const LoadDestination = () => {
 
                 <div className="row mt-3">
                         {
-                            tourPackage.map(tp => <SingleTour
+                            displayPackages.map(tp => <SingleTour
                                 key={tp._id}
                                 tpData = {tp}
                             ></SingleTour>)
