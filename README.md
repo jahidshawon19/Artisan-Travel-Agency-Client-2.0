@@ -26,7 +26,7 @@
  - Firebase 
 
 ### Live:
-  https://artisann.netlify.app/ 
+  https://artisan-travel-agency.web.app/
 
 
 
