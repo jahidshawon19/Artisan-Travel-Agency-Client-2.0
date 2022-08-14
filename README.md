@@ -4,7 +4,7 @@
 
 ## Tourism Related Web Application
 
-In the project directory, you can run:
+
 
 ### Features:
 
