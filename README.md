@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Artisan Travel Agency
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Tourism Related Web Application
 
 ## Available Scripts
 

@@ -20,8 +20,8 @@ const Login = () => {
     return (
         <>
             <Navbar></Navbar>
-                <section className='py-5 mt-5' style={{backgroundImage: "url('https://images.pexels.com/photos/1269968/pexels-photo-1269968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=500&dpr=1')"}}>
-                <div className="container">
+                <section className='py-5 mt-5' >
+                <div className="container" style={{backgroundImage: "url('https://images.pexels.com/photos/673648/pexels-photo-673648.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')", backgroundAttachment:"fixed"}}>
                     <div className="row py-5 mt-5">
                         <div className="col-lg-4"></div>
                         <div className="col-lg-4">
