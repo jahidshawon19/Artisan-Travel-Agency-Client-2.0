@@ -8,7 +8,7 @@ const LoadDestination = () => {
     const[displayPackages, setDisplayPackages] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8000/tourPackages')
+        fetch('https://intense-citadel-58521.herokuapp.com/tourPackages')
         .then(res => res.json())
         .then(data=>{
             setTourPackage(data)

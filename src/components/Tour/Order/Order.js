@@ -64,7 +64,7 @@ const Order = () => {
 
         
 
-        fetch('http://localhost:8000/orderTour', {
+        fetch('https://intense-citadel-58521.herokuapp.com/orderTour', {
             method: 'POST',
             headers: {
               'content-type' : 'application/json',
@@ -86,7 +86,7 @@ const Order = () => {
 
 
     useEffect(()=>{
-        fetch(`http://localhost:8000/tourPackages/${tourId}`)
+        fetch(`https://intense-citadel-58521.herokuapp.com/tourPackages/${tourId}`)
         .then(res=>res.json())
         .then(data=>setSingleTour(data))
     }, [])

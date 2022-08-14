@@ -7,7 +7,7 @@ const UpdatePackage = () => {
     const { id } = useParams()
 
     useEffect(()=>{
-        const url = `http://localhost:8000/tourPackages/${id}`
+        const url = `https://intense-citadel-58521.herokuapp.com/tourPackages/${id}`
         fetch(url)
             .then(res =>res.json())
             .then(data => setTourPackage(data))
@@ -47,7 +47,7 @@ const UpdatePackage = () => {
 
 
     const handleUpdateTourPackage = e =>{
-        const url = `http://localhost:8000/tourPackages/${id}`
+        const url = `https://intense-citadel-58521.herokuapp.com/tourPackages/${id}`
         fetch(url, {
             method:'PUT',
             headers:{

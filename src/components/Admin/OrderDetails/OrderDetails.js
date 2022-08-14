@@ -7,7 +7,7 @@ const OrderDetails = () => {
     const {orderId} = useParams()
 
     useEffect(()=>{
-        fetch(`http://localhost:8000/orderTours/${orderId}`)
+        fetch(`https://intense-citadel-58521.herokuapp.com/orderTours/${orderId}`)
         .then(res=>res.json())
         .then(data=>setOrderDetail(data))
     }, [])
