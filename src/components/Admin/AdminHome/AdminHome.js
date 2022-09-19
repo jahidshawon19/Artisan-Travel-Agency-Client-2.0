@@ -6,13 +6,13 @@ const AdminHome = () => {
     const [orders, setOrders] = useState([])
 
     useEffect(()=>{
-        fetch('https://intense-citadel-58521.herokuapp.com/orderTours')
+        fetch('http://localhost:5000/orderTours')
         .then(res => res.json())
         .then(data=>setOrders(data))
     },[])
 
     const handleDeleteOrder = (id)=>{
-        const url = `https://intense-citadel-58521.herokuapp.com/orderTours/${id}`
+        const url = `http://localhost:5000/orderTours/${id}`
         fetch(url, {
             method:'DELETE'
         })

@@ -16,6 +16,7 @@ import AddPacakge from './components/Admin/AddPacakge/AddPacakge';
 import AdminHome from './components/Admin/AdminHome/AdminHome';
 import OrderDetails from './components/Admin/OrderDetails/OrderDetails';
 import UpdatePackage from './components/Admin/UpdatePackage/UpdatePackage';
+import Success from './components/Success/Success';
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
 
             <PrivateRoute path="/profile">
               <Profile></Profile>
+            </PrivateRoute>
+
+            <PrivateRoute path="/success">
+              <Success></Success>
             </PrivateRoute>
 
             <Route path="/about">

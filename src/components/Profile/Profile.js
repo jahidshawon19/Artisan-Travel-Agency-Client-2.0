@@ -11,13 +11,13 @@ const Profile = () => {
     const [orders, setOrders] = useState([])
 
     useEffect(()=>{
-        fetch(`https://intense-citadel-58521.herokuapp.com/myorders?email=${loginUser.email}`)
+        fetch(`http://localhost:5000/myorders?email=${loginUser.email}`)
         .then(res => res.json())
         .then(data=>setOrders(data))
     },[])
 
     const handleDeleteOrder = (id)=>{
-        const url = `https://intense-citadel-58521.herokuapp.com/orderTours/${id}`
+        const url = `http://localhost:5000/orderTours/${id}`
         fetch(url, {
             method:'DELETE'
         })

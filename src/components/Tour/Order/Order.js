@@ -11,9 +11,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const Order = () => {
     const {loginUser} = useAuth()
-
     const {tourId} = useParams()
-
     const [singleTour, setSingleTour] = useState({}) 
 
     const packageNameRef = useRef();
@@ -22,13 +20,14 @@ const Order = () => {
     const TouristEmailRef = useRef();
     const TouristMobileRef = useRef();
     const personRef = useRef();
-    const paymentMethodRef = useRef();
-    const transactionIdRef = useRef();
+    // const paymentMethodRef = useRef();
+    // const transactionIdRef = useRef();
     const dateRef = useRef();
     const addressRef = useRef();
     const cityRef = useRef();
 
     const handleTourOrder = e =>{
+
         const packageName = packageNameRef.current.value;
         const unitPrice = priceRef.current.value;
         const intUnitPrice = parseInt(unitPrice) 
@@ -39,8 +38,8 @@ const Order = () => {
         const intPerson = parseInt(person)
         const totalBill = parseInt(intUnitPrice*intPerson)
         
-        const paymentMethod = paymentMethodRef.current.value;
-        const transactionId = transactionIdRef.current.value;
+        // const paymentMethod = paymentMethodRef.current.value;
+        // const transactionId = transactionIdRef.current.value;
         const date = dateRef.current.value;
         const address = addressRef.current.value;
         const city = cityRef.current.value;
@@ -53,8 +52,8 @@ const Order = () => {
             'TouristMobile':TouristMobile,
             'person':intPerson,
             'totalBill':totalBill,
-            'paymentMethod':paymentMethod,
-            'transactionId':transactionId,
+            // 'paymentMethod':paymentMethod,
+            // 'transactionId':transactionId,
             'date':date,
             'address':address,
             'city':city,
@@ -64,7 +63,7 @@ const Order = () => {
 
         
 
-        fetch('https://intense-citadel-58521.herokuapp.com/orderTour', {
+        fetch('http://localhost:5000/orderTour', {
             method: 'POST',
             headers: {
               'content-type' : 'application/json',
@@ -72,10 +71,35 @@ const Order = () => {
             body: JSON.stringify(newTourOrder)
           })
             .then(res => res.json())
+
             .then(data =>{
                 if(data.insertedId){
-                    alert('Your Order Submitted Successfully. We Will Call You Soon.Thanl You')
-                    e.target.reset()
+        
+                    //  PAYMENT GATEWAY START
+
+                        const paymentInformation = {
+                            cus_name:loginUser?.displayName,
+                            cus_email:loginUser?.email,
+                            product_name:singleTour?.packageName,
+                        
+                            total_amount:singleTour?.price * newTourOrder.person
+                            
+                        }
+    
+                        fetch('http://localhost:5000/init', {
+                            method: 'POST',
+                            headers: {
+                            'content-type' : 'application/json',
+                            },
+                            body: JSON.stringify(paymentInformation)
+                        })
+    
+                        .then(res=>res.json())
+                        .then(data=>{
+                            window.location.replace(data)
+                        })
+
+                     //  PAYMENT GATEWAY END
                 }
             })
 
@@ -85,13 +109,17 @@ const Order = () => {
 
 
 
-    useEffect(()=>{
-        fetch(`https://intense-citadel-58521.herokuapp.com/tourPackages/${tourId}`)
-        .then(res=>res.json())
-        .then(data=>setSingleTour(data))
-    }, [])
+        useEffect(()=>{
+            fetch(`http://localhost:5000/tourPackages/${tourId}`)
+            .then(res=>res.json())
+            .then(data=>setSingleTour(data))
+        }, [])
 
 
+  
+        
+  
+    
     
     return (
         <>
@@ -117,27 +145,21 @@ const Order = () => {
 
                                 <div class="form-group" >
                                     <label for="exampleInputEmail1">Person</label>
-                                    <input type="number" class="form-control" ref={personRef} />
+                                    <input type="number" class="form-control" ref={personRef} required />
                                 </div>
                                
-
                                 <div class="form-group">
-                                <label for="floatingSelect">Select Online Payment Method</label>
-                                <select class="form-control" id="floatingSelect" aria-label="Floating label select example" ref={paymentMethodRef}>
-                                    
-                                    <option value="1">Bikash</option>
-                                    <option value="2">Nogadh</option>
-                                    
-                                </select>
-                           
-                            </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Transaction ID</label>
-                                    <input type="text" class="form-control" ref={transactionIdRef} />
+                                    <label for="exampleInputEmail1">Full Name</label>
+                                    <input type="text" class="form-control" value={loginUser.displayName} ref={TouristNameRef} />
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Mobile Number</label>
+                                    <input type="text" class="form-control" ref={TouristMobileRef} maxLength="11" minLength="11" required />
+                                </div>
+
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Date</label>
-                                    <input type="date" class="form-control" ref={dateRef} />
+                                    <input type="date" class="form-control" ref={dateRef} required />
                                 </div>
 
                                 <div class="form-group d-none">
@@ -151,26 +173,19 @@ const Order = () => {
                            </div>
 
                            <div className="col-lg-6">
-                           <div class="form-group">
-                                    <label for="exampleInputEmail1">Full Name</label>
-                                    <input type="text" class="form-control" value={loginUser.displayName} ref={TouristNameRef} />
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Mobile Number</label>
-                                    <input type="text" class="form-control" ref={TouristMobileRef} maxLength="11" minLength="11" />
-                                </div>
+                          
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email</label>
-                                    <input type="email" class="form-control" value={loginUser.email} ref={TouristEmailRef} />
+                                    <input type="email" class="form-control" value={loginUser.email} ref={TouristEmailRef} required />
                                 </div>
                                   <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Address</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ref={addressRef}></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ref={addressRef} required></textarea>
                                 </div>
 
                                 <div class="form-group">
                                 <label for="floatingSelect">City</label>
-                                <select class="form-control" id="floatingSelect" aria-label="Floating label select example" ref={cityRef}>
+                                <select class="form-control" id="floatingSelect" aria-label="Floating label select example" ref={cityRef} required>
                                     
                                     <option value="Agrabadh">Agrabadh</option>
                                     <option value="Dewan Hat">Dewan Hat</option>
@@ -193,6 +208,7 @@ const Order = () => {
 
                            
                         </form>
+                         
                     </div>
                 </div>
             </div>

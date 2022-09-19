@@ -28,7 +28,7 @@ const AddPacakge = () => {
 
 
  
-        fetch('https://intense-citadel-58521.herokuapp.com/tourPackage', {
+        fetch('http://localhost:5000/tourPackage', {
             method: 'POST',
             headers: {
               'content-type' : 'application/json',
@@ -53,7 +53,7 @@ const AddPacakge = () => {
 
     
     useEffect(()=>{
-        fetch('https://intense-citadel-58521.herokuapp.com/tourPackages')
+        fetch('http://localhost:5000/tourPackages')
         .then(res => res.json())
         .then(data=>setTourPackage(data))
     },[])
@@ -61,7 +61,7 @@ const AddPacakge = () => {
 
 
     const handleDeletePackage = (id)=>{
-        const url = `https://intense-citadel-58521.herokuapp.com/tourPackages/${id}`
+        const url = `http://localhost:5000/tourPackages/${id}`
         fetch(url, {
             method:'DELETE'
         })
